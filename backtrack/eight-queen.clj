@@ -1,22 +1,32 @@
+;; https://en.wikipedia.org/wiki/Eight_queens_puzzle
+
 (ns eight-queen
   (:require [clojure.string :as s]))
 
-(defn conflict? [x y board]
-  (->> (map-indexed vector (take y board))
-       (some (fn [[y1 x1]]
-               (or
-                (= (- x1 y1) (- x y))
-                (= (+ x1 y1) (+ x y)))))))
+(defn check? [x y queens]
+  (not (->> (map-indexed vector queens)
+            (some (fn [[qy qx]]
+                    (or
+                     (= y qy)
+                     (= x qx)
+                     (= (- qx qy) (- x y))
+                     (= (+ qx qy) (+ x y))))))))
 
-(defn check? [board]
-  (->> (map-indexed vector board)
-       (every? (fn [[y x]] (not (conflict? x y board))))))
+(defn pop-queen [n x queens]
+  (if (>= x n)
+    (recur n (inc (peek queens)) (pop queens))
+    [x queens]))
 
-(defn queen [n]
-  (loop [board (vec (range n))]
-    (if (check? board)
-      board
-      (recur (shuffle board)))))
+(defn queen
+  ([n] (queen n 0 ()))
+  ([n x queens]
+   (if (>= (count queens) n)
+     queens
+     (when (< x n)
+       (if (check? x (count queens) (reverse queens))
+         (recur n 0 (conj queens x))
+         (let [[nx nqueens] (pop-queen n (inc x) queens)]
+           (recur n nx nqueens)))))))
 
 (defn display-queen [n]
   (let [board (vec (repeat n (vec (repeat n "."))))

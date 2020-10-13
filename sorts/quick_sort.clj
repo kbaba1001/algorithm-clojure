@@ -1,3 +1,4 @@
+;; https://en.wikipedia.org/wiki/Quicksort
 (defn qsort [arr]
   (println "arr:" arr)
   (if (empty? arr)

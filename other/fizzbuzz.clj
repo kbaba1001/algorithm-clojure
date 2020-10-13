@@ -1,3 +1,5 @@
+;; https://en.wikipedia.org/wiki/Fizz_buzz
+
 (defn fb [n]
   (cond
     (= (mod n 15) 0) "fizzbuzz"

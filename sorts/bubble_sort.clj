@@ -1,3 +1,4 @@
+;; https://en.wikipedia.org/wiki/Bubble_sort
 (defn bubble-sort
   ([collection] (bubble-sort collection 0))
   ([collection i]

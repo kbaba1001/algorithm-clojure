@@ -1,3 +1,4 @@
+;; https://en.wikipedia.org/wiki/Quicksort
 (defn qsort [arr]
   (let [stack (new java.util.Stack)]
     (with-local-vars [result []]
