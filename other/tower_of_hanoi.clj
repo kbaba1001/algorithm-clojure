@@ -86,19 +86,35 @@
 ;; C: 2 1
 ;; (A -> C)
 
+;; def hanoi(n, m = 1, arr = [(1..n).to_a.reverse, [], []])
+;;   puts "A: #{arr[0]}\nB: #{arr[1]}\nC: #{arr[2]}\n------------"
+;;   if arr[2].length >= n
+;;     return
+;;   end
+
+;;   # ((m & (m-1)) % 3) 番目の棒にある円盤を (((m| (m-1)) +1) %3) 番目の棒に移動する
+;;   tmp = arr[((m & (m - 1)) % 3)].pop
+;;   if !tmp.nil?
+;;     arr[(((m | (m - 1)) + 1) % 3)].push(tmp)
+;;   end
+;;   hanoi(n, m + 1, arr)
+;; end
+
+;; hanoi(3)
+
 ;; ((m & (m-1)) % 3) - 1 番目の棒にある円盤を (((m| (m-1)) +1) %3) - 1 番目の棒に移動する
 (defn hanoi
-  ([n] (hanoi n 0 [(atom (vec (reverse (range 1 (inc n))))) (atom []) (atom [])]))
-  ([n m [[a b c] :as sticks]]
-   (println "A: " @a "\nB: " @b "\nC: " @c "\n---------")
-   (when-not (or (= (count @c) n) (< m 10))
-     (let [from-index (dec (mod (bit-and m (dec m)) n))
-           to-index (dec (mod (inc (bit-or m (dec m))) n))
-           from-arr (get sticks from-index)
-           to-arr (get sticks to-index)
-           from-value (last @from-arr)]
-       (reset! from-arr (vec (take (dec (count @from-arr)) @from-arr)))
-       (swap! to-arr conj from-value)
-       (hanoi n (inc m) sticks)))))
+  ([n]
+   (let [a (java.util.Stack.)]
+     (doseq [i (reverse (range 1 (inc n)))]
+       (.push a i))
+     (hanoi n 1 [a (java.util.Stack.) (java.util.Stack.)])))
+  ([n m [a b c :as arr]]
+   (printf "A: %s\nB: %s\nC: %s\n--------\n" a b c)
+   (when (< (.size c) n)
+     (let [tmp (.pop (get arr (mod (bit-and m (dec m)) 3)))]
+       (when-not (nil? tmp)
+         (.push (get arr (mod (inc (bit-or m (dec m))) 3)) tmp))
+       (recur n (inc m) arr)))))
 
 (hanoi 2)
