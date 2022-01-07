@@ -1,3 +1,5 @@
+#!/usr/bin/env bb
+
 ;; https://en.wikipedia.org/wiki/Linear_search
 
 ;; (defn linear-search [coll target]

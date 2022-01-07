@@ -1,3 +1,5 @@
+;; TODO I want to run this in Babashka, but I can't use java.util.Stack in the environment.
+
 ;; https://en.wikipedia.org/wiki/Quicksort
 (defn qsort [arr]
   (let [stack (new java.util.Stack)]

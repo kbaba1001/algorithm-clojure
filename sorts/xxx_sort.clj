@@ -1,3 +1,5 @@
+#!/usr/bin/env bb
+
 ;; I don't know this sort algorithm's name...
 (defn xxx-sort [coll]
   (reduce

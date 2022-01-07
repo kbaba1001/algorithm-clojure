@@ -1,3 +1,5 @@
+#!/usr/bin/env bb
+
 ;; https://en.wikipedia.org/wiki/Bead_sort
 
 (defn bead-sort [collection]

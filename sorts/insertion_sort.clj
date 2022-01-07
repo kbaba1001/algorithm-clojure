@@ -1,3 +1,5 @@
+#!/usr/bin/env bb
+
 ;; https://en.wikipedia.org/wiki/Insertion_sort
 (defn insert [n coll]
   (cond

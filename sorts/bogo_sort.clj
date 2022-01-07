@@ -1,3 +1,5 @@
+#!/usr/bin/env bb
+
 ;; https://en.wikipedia.org/wiki/Bogosort
 (defn bogo-sort [collection]
   (let [result (shuffle collection)]

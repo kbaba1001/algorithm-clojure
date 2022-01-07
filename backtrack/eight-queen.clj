@@ -1,3 +1,5 @@
+#!/usr/bin/env bb
+
 ;; https://en.wikipedia.org/wiki/Eight_queens_puzzle
 
 (ns eight-queen

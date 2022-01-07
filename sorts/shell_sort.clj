@@ -1,3 +1,5 @@
+#!/usr/bin/env bb
+
 ;; https://en.wikipedia.org/wiki/Shellsort
 
 (def gaps [701 301 132 57 23 10 4 1])
